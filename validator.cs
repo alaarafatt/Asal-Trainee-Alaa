@@ -1,17 +1,24 @@
 ﻿using System;
 namespace Task
 {
-	public class validator
+	public class Validator : IValidator
 	{
-		
-
-		public validator()
+        private List<Product> _products;
+        
+        public Validator(List<Product> products)
 		{
-
+            _products = products;
 		
 		}
 
-       public static bool nameValid(string n)
+        public  bool Validate((string name ,string code, string des, string price) prod )
+        {
+
+            return NameValid(prod.name) && CodeValid(prod.code)&& DesValid(prod.des)&& PriceValid(prod.price);
+
+        }
+
+       public  bool NameValid(string n)
         {
 			if(n.Length <= 100 && !string.IsNullOrWhiteSpace(n))
 			{
@@ -24,14 +31,14 @@ namespace Task
         }
 
 
-       public static bool codeValid(string c, List<Product> valproduct)
+       public  bool CodeValid(string c)
         {
             bool found = false;
             if (c.Length <= 50 && !string.IsNullOrWhiteSpace(c))
             {
-                foreach (Product cc in valproduct)
+                foreach (Product cc in _products)
                 {
-                    if (c == cc.getcode())
+                    if (c == cc.GetCode())
                     {
                         Console.Write("\n the product code must be unique");
                         found = true;
@@ -54,9 +61,9 @@ namespace Task
             }
         }
 
-      public static bool priceValid(ref double p, string n)
+      public  bool PriceValid(string n)
         {
-            if (!string.IsNullOrWhiteSpace(n) && double.TryParse(n, out p))
+            if (!string.IsNullOrWhiteSpace(n) && double.TryParse(n,out double number))
             {
                
                 return true;
@@ -66,7 +73,7 @@ namespace Task
             
         }
 
-       public static bool desValid(string n)
+       public  bool DesValid(string n)
         {
             if(n.Length <= 500 && !string.IsNullOrWhiteSpace(n))
             {
@@ -75,9 +82,6 @@ namespace Task
             Console.WriteLine(" the product des must be not null and less or equal to 500 char");
             return false;
         }
-
-
-
 
 
 

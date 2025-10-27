@@ -19,12 +19,12 @@ namespace Task
 
         }
 
-        public void print()
+        public void Print()
         {
             Console.WriteLine($"\n\n\nthe product name : {name}\n product code : {code} \n product description {description}\n product price {price}\n\n\n");
         }
-
-        public string getcode()
+        
+        public string GetCode()
         {
             return code;
         }
